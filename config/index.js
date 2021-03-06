@@ -1,7 +1,14 @@
 module.exports = {
   author: "sajalshres",
   siteTitle: "Sajal Shrestha Portfolio",
-  color: {
+  siteShortTitle: "sajalshres.",
+  siteDescription:
+    "Hi there! I'm Konstantin Münster, a product manager and freelance web developer based in Hamburg.",
+  siteUrl: "https://sajalshres.github.io",
+  siteLanguage: "en_US",
+  siteIcon: "content/favicon.png", // Relative to gatsby-config file
+  seoTitleSuffix: "Sajal Shrestha", // SEO title syntax will be e.g. "Imprint - {seoTitleSuffix}"
+  colors: {
     lightTheme: {
       primary: "#000000",
       secondary: "#CDF3E1",
@@ -20,8 +27,8 @@ module.exports = {
       tertiary: "#252525",
       text: "rgba(255, 255, 255, 0.87)",
       subtext: "#AAAAAA",
-      background: "#121212",
-      card: "#1C1C1C",
+      background: "#616161",
+      card: "#757575",
       scrollBar: "rgba(255, 255, 255, 0.5)",
       boxShadow: "rgba(0, 0, 0, 0.16)",
       boxShadowHover: "rgba(0, 0, 0, 0.32)",
@@ -30,18 +37,21 @@ module.exports = {
   fonts: {
     primary: "Roboto, Arial, sans-serif",
   },
-  social: [
+  mediumRssFeed:
+    "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40sajalshres",
+  shownArticles: 3,
+  socialMedia: [
     {
       name: "Github",
       url: "https://github.com/sajalshres",
     },
     {
       name: "Linkedin",
-      url: "https://github.com/sajalshres",
+      url: "https://www.linkedin.com/in/sajalshres/",
     },
     {
       name: "Dev.to",
-      url: "https://github.com/sajalshres",
+      url: "https://dev.to/sajalshres",
     },
   ],
   navLinks: {
