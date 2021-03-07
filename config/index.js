@@ -50,6 +50,10 @@ module.exports = {
       url: "https://www.linkedin.com/in/sajalshres/",
     },
     {
+      name: "Medium",
+      url: "https://sajalshres.medium.com/",
+    },
+    {
       name: "Dev.to",
       url: "https://dev.to/sajalshres",
     },
