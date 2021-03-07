@@ -12,7 +12,7 @@ const StyledFooter = styled.footer`
   width: 100%;
   height: ${({ theme }) => theme.footerHeight};
   background: ${({ theme, darkMode }) =>
-    darkMode ? theme.colors.background : theme.colors.primary};
+    darkMode ? theme.colors.background : theme.colors.secondary};
   border-top: ${({ theme, darkMode }) =>
     darkMode ? `3px solid ${theme.colors.boxShadowHover}` : null};
   margin-top: 10rem;
@@ -55,7 +55,7 @@ const Footer = () => {
           <Logo
             size="1.5rem"
             color={
-              darkMode ? darkTheme.colors.primary : lightTheme.colors.background
+              darkMode ? darkTheme.colors.primary : lightTheme.colors.primary
             }
           />
         </Link>
