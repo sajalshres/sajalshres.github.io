@@ -3,7 +3,7 @@ module.exports = {
   siteTitle: "Sajal Shrestha Portfolio",
   siteShortTitle: "sajalshres.",
   siteDescription:
-    "Hi there! I'm Konstantin Münster, a product manager and freelance web developer based in Hamburg.",
+    "I'm Sajal Shrestha, I design, build and deploy things for the web.",
   siteUrl: "https://sajalshres.github.io",
   siteLanguage: "en_US",
   siteIcon: "content/favicon.png", // Relative to gatsby-config file
