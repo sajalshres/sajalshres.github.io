@@ -1,0 +1,12 @@
+[
+  { "id": "web-development", "name": "Web Development", "icon": "web-development.png" },
+  { "id": "web-design", "name": "Web Design", "icon": "web-design.png" },
+  { "id": "product-management", "name": "Product Management", "icon": "manage.png" },
+  { "id": "devops", "name": "DevOps", "icon": "devops.png" },
+  { "id": "javascript", "name": "JavaScript (ES6+)", "icon": "js.png" },
+  { "id": "python", "name": "Python", "icon": "python.png" },
+  { "id": "go", "name": "Go Lang", "icon": "go-lang.png" },
+  { "id": "react", "name": "React.js", "icon": "react.png" },
+  { "id": "vue", "name": "Vue.js", "icon": "vue.png" },
+  { "id": "django", "name": "Django", "icon": "django.png" }
+]

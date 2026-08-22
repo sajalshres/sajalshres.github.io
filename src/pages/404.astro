@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page not found — Sajal Shrestha"
+  description="The requested page could not be found."
+  canonical="https://sajalshres.github.io/404"
+  name="Sajal Shrestha"
+>
+  <main class="not-found" id="main-content">
+    <p>404 / WRONG TURN</p>
+    <h1>Nothing to see here.</h1>
+    <a class="button button-primary" href="/">Back to the portfolio <span aria-hidden="true">↗</span></a>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found { min-height: 100svh; display: grid; place-content: center; justify-items: start; width: min(900px, calc(100% - 2rem)); margin: auto; }
+  p { font-family: var(--font-mono); font-weight: 500; }
+  h1 { margin-block: 1rem 3rem; }
+</style>

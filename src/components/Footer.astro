@@ -1,0 +1,16 @@
+---
+interface SocialLink { name: string; url: string }
+interface Props { name: string; social: SocialLink[] }
+const { name, social } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <p>Designed &amp; built by {name} <span aria-hidden="true">✦</span> {new Date().getFullYear()}</p>
+    <div class="footer-links" aria-label="Social profiles">
+      {social.map((item) => (
+        <a href={item.url} target="_blank" rel="me noopener noreferrer">{item.name}<span class="sr-only"> (opens in a new tab)</span></a>
+      ))}
+    </div>
+  </div>
+</footer>

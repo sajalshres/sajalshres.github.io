@@ -1,0 +1,18 @@
+{
+  "site": {
+    "name": "Sajal Shrestha",
+    "shortName": "sajalshres.",
+    "title": "Tech Lead and Web Developer",
+    "location": "Kathmandu, Nepal",
+    "description": "I'm Sajal Shrestha, I design, build and deploy things for the web.",
+    "email": "sajal.shres@gmail.com",
+    "siteUrl": "https://sajalshres.github.io",
+    "mediumFeed": "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40sajalshres",
+    "social": [
+      { "name": "GitHub", "url": "https://github.com/sajalshres" },
+      { "name": "LinkedIn", "url": "https://www.linkedin.com/in/sajalshres/" },
+      { "name": "Medium", "url": "https://sajalshres.medium.com/" },
+      { "name": "Dev.to", "url": "https://dev.to/sajalshres" }
+    ]
+  }
+}

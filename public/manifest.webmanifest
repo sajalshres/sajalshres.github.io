@@ -1,0 +1,12 @@
+{
+  "name": "Sajal Shrestha Portfolio",
+  "short_name": "sajalshres.",
+  "description": "Tech Lead and Web Developer based in Kathmandu, Nepal.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f3e9",
+  "theme_color": "#ffd84d",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,84 @@
+---
+import "../styles/global.css";
+import "@fontsource-variable/space-grotesk";
+import "@fontsource/dm-mono/400.css";
+import "@fontsource/dm-mono/500.css";
+import favicon from "../../content/favicon.png";
+import profileImage from "../../content/index/contact/profileImage.jpg";
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  name: string;
+}
+
+const { title, description, canonical, name } = Astro.props;
+const siteUrl = "https://sajalshres.github.io";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}#person`,
+      name,
+      url: siteUrl,
+      image: new URL(profileImage.src, siteUrl).href,
+      jobTitle: "Tech Lead and Senior Software Engineer",
+      sameAs: [
+        "https://github.com/sajalshres",
+        "https://www.linkedin.com/in/sajalshres/",
+        "https://sajalshres.medium.com/",
+        "https://dev.to/sajalshres",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      url: siteUrl,
+      name: title,
+      description,
+      author: { "@id": `${siteUrl}#person` },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#ffd84d" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href={favicon.src} />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={title} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(profileImage.src, canonical)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(profileImage.src, canonical)} />
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem("theme");
+        const theme = stored === "light" || stored === "dark"
+          ? stored
+          : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <slot />
+  </body>
+</html>

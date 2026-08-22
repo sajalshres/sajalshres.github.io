@@ -1,0 +1,219 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getLatestArticles } from "../lib/articles";
+
+import waveImage from "../../content/index/hero/waving-hand.png";
+import aboutImage from "../../content/index/about/me.jpeg";
+import profileImage from "../../content/index/contact/profileImage.jpg";
+import airbnbImage from "../../content/index/projects/AirbnbAnalysis/screenshot.png";
+import boggleImage from "../../content/index/projects/BoggleGame/screenshot.png";
+import cornerstoneImage from "../../content/index/projects/CornerStone/screenshot.png";
+import pythonBookImage from "../../content/index/projects/PythonBook/screenshot.png";
+import webDevelopmentIcon from "../../content/index/interests/icons/web-development.png";
+import webDesignIcon from "../../content/index/interests/icons/web-design.png";
+import managementIcon from "../../content/index/interests/icons/manage.png";
+import devopsIcon from "../../content/index/interests/icons/devops.png";
+import javascriptIcon from "../../content/index/interests/icons/js.png";
+import pythonIcon from "../../content/index/interests/icons/python.png";
+import goIcon from "../../content/index/interests/icons/go-lang.png";
+import reactIcon from "../../content/index/interests/icons/react.png";
+import vueIcon from "../../content/index/interests/icons/vue.png";
+import djangoIcon from "../../content/index/interests/icons/django.png";
+
+const [profileEntry] = await getCollection("profile");
+const profile = profileEntry.data;
+const skills = await getCollection("skills");
+const projects = (await getCollection("projects"))
+  .filter((project) => project.data.visible)
+  .sort((a, b) => a.data.position - b.data.position || a.data.title.localeCompare(b.data.title));
+const articles = await getLatestArticles(profile.mediumFeed);
+const [aboutEntry] = await getCollection("about");
+const [contactEntry] = await getCollection("contact");
+const { Content: AboutContent } = await render(aboutEntry);
+const { Content: ContactContent } = await render(contactEntry);
+
+const projectImages = {
+  "Airbnb Analysis": airbnbImage,
+  "Boggle Game": boggleImage,
+  CornerStone: cornerstoneImage,
+  "Python Book": pythonBookImage,
+};
+
+const skillIcons = {
+  "web-development.png": webDevelopmentIcon,
+  "web-design.png": webDesignIcon,
+  "manage.png": managementIcon,
+  "devops.png": devopsIcon,
+  "js.png": javascriptIcon,
+  "python.png": pythonIcon,
+  "go-lang.png": goIcon,
+  "react.png": reactIcon,
+  "vue.png": vueIcon,
+  "django.png": djangoIcon,
+};
+
+const formatDate = (date: string) => date
+  ? new Intl.DateTimeFormat("en", { month: "short", day: "numeric", year: "numeric" }).format(new Date(date))
+  : "Recent article";
+---
+
+<BaseLayout
+  title={`${profile.name} — ${profile.title}`}
+  description={profile.description}
+  canonical={profile.siteUrl}
+  name={profile.name}
+>
+  <Header shortName={profile.shortName} />
+
+  <main id="main-content">
+    <section class="hero shell" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span class="status-dot"></span> Based in {profile.location}</div>
+        <p class="hello">Hello <Image src={waveImage} alt="" width={52} height={52} loading="eager" /></p>
+        <h1 id="hero-title">I'm <span>{profile.name}</span></h1>
+        <p class="hero-line">I design, build and deploy <mark>things for the web.</mark></p>
+        <p class="hero-role">{profile.title}.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#projects">View projects <span aria-hidden="true">↓</span></a>
+          <a class="button button-secondary" href="#contact">Contact me <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <aside class="hero-card reveal delay-1" aria-label="Areas of expertise">
+        <div class="card-tape" aria-hidden="true"></div>
+        <p class="card-number">01 / 04</p>
+        <p>TECHNICAL<br />LEADERSHIP</p>
+        <span>+</span>
+        <p>FULL-STACK<br />ENGINEERING</p>
+        <div class="scribble" aria-hidden="true">↗</div>
+      </aside>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div>WEB DEVELOPMENT ✦ DEVOPS ✦ PRODUCT THINKING ✦ OPEN SOURCE ✦ WEB DEVELOPMENT ✦ DEVOPS ✦ PRODUCT THINKING ✦ OPEN SOURCE ✦</div>
+    </div>
+
+    <section class="section shell" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading">
+        <div><span class="section-index">01.</span><h2 id="projects-title">Selected projects</h2></div>
+        <p>Things I've built, shipped, and learned from.</p>
+      </div>
+      <div class="project-list">
+        {projects.map((project, index) => {
+          const image = projectImages[project.data.title as keyof typeof projectImages];
+          return (
+            <article class="project-card">
+              <div class="project-media">
+                <span class="project-count">0{index + 1}</span>
+                {image && (
+                  <Image
+                    src={image}
+                    alt={`Screenshot of ${project.data.title}`}
+                    widths={[480, 800, 1200]}
+                    sizes="(max-width: 767px) 100vw, 48vw"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                )}
+              </div>
+              <div class="project-content">
+                <p class="project-category">{project.data.emoji} {project.data.category}</p>
+                <h3>{project.data.title}</h3>
+                <p>{project.data.description}</p>
+                <ul class="tag-list" aria-label="Technologies">
+                  {project.data.tags.map((tag) => <li>{tag}</li>)}
+                </ul>
+                <div class="project-links">
+                  {project.data.github && (
+                    <a href={project.data.github} target="_blank" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+                  )}
+                  {project.data.external && (
+                    <a href={project.data.external} target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+      <a class="text-link" href="https://github.com/sajalshres" target="_blank" rel="noopener noreferrer">See more on GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+    </section>
+
+    <section class="section about-section" id="about" aria-labelledby="about-title">
+      <div class="shell">
+        <div class="section-heading light-heading">
+          <div><span class="section-index">02.</span><h2 id="about-title">About me</h2></div>
+          <p>Code, curiosity, and a healthy amount of tinkering.</p>
+        </div>
+        <div class="about-grid">
+          <div class="portrait-wrap">
+            <div class="portrait-label">HELLO, IT'S ME →</div>
+            <Image src={aboutImage} alt="Sajal Shrestha" widths={[360, 640]} sizes="(max-width: 767px) 80vw, 32vw" />
+          </div>
+          <div class="about-copy"><AboutContent /></div>
+        </div>
+
+        <div class="skills-block">
+          <p class="mini-heading">Interests &amp; skills</p>
+          <ul class="skills-grid">
+            {skills.map((skill, index) => {
+              const icon = skillIcons[skill.data.icon as keyof typeof skillIcons];
+              return (
+                <li style={`--i: ${index}`}>
+                  {icon && <Image src={icon} alt="" width={25} height={25} />}
+                  <span>{skill.data.name}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="articles" aria-labelledby="articles-title">
+      <div class="section-heading">
+        <div><span class="section-index">03.</span><h2 id="articles-title">Latest articles</h2></div>
+        <p>Notes from the workbench, published on Medium.</p>
+      </div>
+      {articles.length > 0 ? (
+        <div class="articles-grid">
+          {articles.map((article, index) => (
+            <a class="article-card" href={article.link} target="_blank" rel="noopener noreferrer">
+              <span class="article-index">0{index + 1}</span>
+              <div>
+                <p class="article-meta">{article.categories[0]} · {formatDate(article.published)}</p>
+                <h3>{article.title}</h3>
+              </div>
+              <span class="article-arrow" aria-hidden="true">↗</span>
+              <span class="sr-only">Opens in a new tab</span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="feed-fallback">
+          <p>The feed is taking a break. The writing is still there.</p>
+          <a class="button button-secondary" href="https://sajalshres.medium.com/" target="_blank" rel="noopener noreferrer">Read on Medium <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+      )}
+    </section>
+
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="shell contact-grid">
+        <div>
+          <span class="section-index">04.</span>
+          <p class="contact-kicker">Have something interesting in mind?</p>
+          <h2 id="contact-title">Let's talk.</h2>
+          <a class="email-link" href={`mailto:${profile.email}`}>{profile.email} <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="contact-profile">
+          <Image src={profileImage} alt={profile.name} width={160} height={160} />
+          <div class="contact-copy"><ContactContent /></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer name={profile.name} social={profile.social} />
+</BaseLayout>
