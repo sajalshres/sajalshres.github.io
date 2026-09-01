@@ -25,4 +25,7 @@ Useful commands:
 - About and contact copy: `content/index/about` and `content/index/contact`
 - Projects: `content/index/projects`
 
-Pushes to `master` deploy through GitHub Actions. GitHub Pages must use **GitHub Actions** as its source in the repository settings.
+Pushes to `master` deploy through GitHub Actions. In the repository settings:
+
+1. Set **Pages → Build and deployment → Source** to **GitHub Actions**.
+2. Under **Environments → github-pages → Deployment branches and tags**, allow the `master` branch.
